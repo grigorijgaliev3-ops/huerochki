@@ -1,0 +1,24 @@
+{
+  "name": "huerochki",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Сайт для подготовки к демонстрационному экзамену 09.02.07",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist -b gh-pages --dotfiles --no-history"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.3.0",
+    "gh-pages": "^6.3.0",
+    "vite": "^8.3.8",
+    "vite-plugin-singlefile": "^2.3.4"
+  }
+}
