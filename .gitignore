@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+
+# Медиа не храним в git — они уходят только в ветку gh-pages из dist/.
+# Если хочешь держать их в репозитории, удали три строки ниже.
+public/doc/
+public/video/
+public/materials/
