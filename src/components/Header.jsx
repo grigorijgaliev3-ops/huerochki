@@ -1,13 +1,30 @@
 import { asset } from '../lib/media.js';
 
-export default function Header({ authed, onLogout }) {
+export default function Header({ authed, onLogout, view, onView }) {
   return (
     <header className="header">
       <div className="wrap header__inner">
-        <a className="brand" href="#top" aria-label="huerochki">
+        <a className="brand" href="#top" aria-label="huerochki" onClick={() => onView('lessons')}>
           <img className="brand__mark" src={asset('logo.svg')} alt="" width="26" height="26" />
           <span>huerochki</span>
         </a>
+
+        <nav className="tabs" aria-label="Разделы">
+          <button
+            type="button"
+            className={view === 'lessons' ? 'tab is-active' : 'tab'}
+            onClick={() => onView('lessons')}
+          >
+            Темы
+          </button>
+          <button
+            type="button"
+            className={view === 'trainer' ? 'tab is-active' : 'tab'}
+            onClick={() => onView('trainer')}
+          >
+            Тренажёр
+          </button>
+        </nav>
 
         <div className="header__right">
           <span className="tag">ИР-23-4</span>

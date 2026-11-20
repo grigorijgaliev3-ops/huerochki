@@ -4,6 +4,7 @@ import Gate from './components/Gate.jsx';
 import Header from './components/Header.jsx';
 import Materials from './components/Materials.jsx';
 import Lessons from './components/Lessons.jsx';
+import Trainer from './components/Trainer.jsx';
 import Footer from './components/Footer.jsx';
 import VideoModal from './components/VideoModal.jsx';
 import { readAuth, readDone, writeAuth, writeDone } from './lib/storage.js';
@@ -12,6 +13,12 @@ export default function App() {
   const [authed, setAuthed] = useState(readAuth);
   const [done, setDone] = useState(() => readDone(lessons));
   const [video, setVideo] = useState(null);
+  const [view, setView] = useState('lessons');
+
+  const changeView = useCallback((next) => {
+    setView(next);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   useEffect(() => {
     document.body.classList.toggle('locked', !authed);
@@ -58,17 +65,23 @@ export default function App() {
     <>
       {!authed && <Gate onSuccess={handleLogin} />}
 
-      <Header authed={authed} onLogout={handleLogout} />
+      <Header authed={authed} onLogout={handleLogout} view={view} onView={changeView} />
 
       <main className="wrap main">
-        <Materials />
-        <Lessons
-          lessons={lessons}
-          done={done}
-          onToggleDone={toggleDone}
-          onResetDone={resetDone}
-          onPlay={setVideo}
-        />
+        {view === 'trainer' ? (
+          <Trainer done={done} />
+        ) : (
+          <>
+            <Materials />
+            <Lessons
+              lessons={lessons}
+              done={done}
+              onToggleDone={toggleDone}
+              onResetDone={resetDone}
+              onPlay={setVideo}
+            />
+          </>
+        )}
       </main>
 
       <Footer />
